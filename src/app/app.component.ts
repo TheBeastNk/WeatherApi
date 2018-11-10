@@ -1,4 +1,4 @@
-import { Component , OnInit} from '@angular/core';
+import { Component } from '@angular/core';
 import { WeatherService } from './weather.service';
 
 @Component({
@@ -6,21 +6,25 @@ import { WeatherService } from './weather.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
-  
-  constructor(private weather : WeatherService){}
+export class AppComponent{
 
+  data : any;
+  icon :string = "https://openweathermap.org/img/w/";
   
-  
-  
-    ngOnInit() {
-      this.getWeather();
-    }
-    getWeather() {
-      this.weather = {} as any;
-      this.weather.getCurrentWeather().subscribe((data) => {
-        this.weather = data;
-      });
-    }
+  constructor(private weather: WeatherService){}
+  ngOnInit(){
+    this.weather.dailyForecast()
+    .subscribe(res => this.data = res
+    )
   }
+
+  convertUnixTime(val:any) :any{
+
+   let unix = 1541828979;
+   let date = new Date(unix*1000);
+   return date;
+
+  }
+
+}
   

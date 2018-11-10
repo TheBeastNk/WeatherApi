@@ -1,13 +1,30 @@
 <div class="container">
-
-  <div class="box1">
-      <img src="https://openweathermap.org/img/w/{{weather.weather[0].id}}" alt="cloud image">
-      <div class="box2">
-        <h3>Weather</h3>
-        <div>Current weather: {{weather.weather[0].description}} </div>
-      </div>
-  </div>
-
-
-</div>
-
+	<div class="small-box" *ngIf="data">
+	<span><img [src]="icon+data.weather[0].icon+'.png'"/>{{data.weather[0].description | uppercase}}</span><br/>
+	<span>temp : {{data.main.temp}}</span><br/>
+	<span>pressure : {{data.main.pressure}}</span><br/>
+	<span>humidity : {{data.main.humidity}}</span><br/>
+	<span>min temp : {{data.main.temp_min}}</span><br/>
+	<span>max temp : {{data.main.temp_max}}</span><br/>
+	<span>visibility : {{data.visibility}}</span><br/>
+	<span>wind : {{"speed "+data.wind.speed}}, {{"deg "+data.wind.deg}}</span><br/>
+	<span>clouds : {{"all "+data.clouds.all}}</span><br/>
+	<span>sys </span><br/>
+	<span>id : {{data.sys.id}}</span><br/>
+	<span>type : {{data.sys.type}}</span><br/>
+	<span>message : {{data.sys.message}}</span><br/>
+	<span>dt : {{convertUnixTime(data.dt)}}</span><br/>
+	<span>country : {{data.sys.country}}</span><br/>
+	<span>sunrise : {{convertUnixTime(data.sys.sunrise)}}</span><br/>
+	<span>sunset : {{convertUnixTime(data.sys.sunset)}}</span><br/>
+	<br/>
+	<span>city id : {{data.id}}</span><br/>
+	<span>city name : {{data.name}}</span><br/>
+	<span>cod : {{data.cod}}</span><br/>
+	
+	
+	</div>
+	<div class="small-box" *ngIf="!data">
+		<span>Sorry. Something happens wrong.Please check your internet connection.</span><br/>
+	</div>	
+	</div>
